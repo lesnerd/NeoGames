@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System;
+using NeoGames.DAL.Entities;
 
-namespace NeoGames
+namespace NeoGames.DAL
 {
     public class OrdersDAOStub
     {

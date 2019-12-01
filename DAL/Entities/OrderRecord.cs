@@ -1,7 +1,7 @@
 
 using System;
 
-namespace NeoGames
+namespace NeoGames.DAL.Entities
 {
     public class OrderRecord
     {
