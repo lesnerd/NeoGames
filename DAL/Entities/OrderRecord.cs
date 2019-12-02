@@ -5,6 +5,8 @@ namespace NeoGames.DAL.Entities
 {
     public class OrderRecord
     {
+        // The construstor is here so I could make some dummy data real quick
+        // In real life 
         public OrderRecord(int itemNumber, decimal amount, DateTime date)
         {
             ItemNumber = itemNumber;
@@ -50,6 +52,5 @@ namespace NeoGames.DAL.Entities
                 purchaseDate = value;
             }
         }
-
     }
 }

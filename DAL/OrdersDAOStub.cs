@@ -21,7 +21,7 @@ namespace NeoGames.DAL
 
         // Should implement CRUD to/from database
         // Reason for the parameters is fitering, so that the dal layer is not wasteful
-        public IEnumerable<OrderRecord> GetOrders(int nubmerOfItems, int index)
+        public IEnumerable<OrderRecord> GetOrders(DateTime date)
         {
             return records;
         }

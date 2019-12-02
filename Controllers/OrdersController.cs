@@ -16,14 +16,18 @@ namespace NeoGames.Controllers
         OrdersService ordersService;
         public OrdersController(OrdersService ordersService)
         {
-            
+            this.ordersService = ordersService;
         }
 
+        // Validate the user request/input - validated that the values are legal/exist
+        // Transform the service request
+        // TODO: which one ot use???
+        //[HttpGet("{date}")]
         [HttpGet]
         public IEnumerable<OrderRecord> Get(string date)
         {
             var dateTime = DateTime.Parse(date);
-            return ordersService.GetOrders();
+            return ordersService.GetOrders(dateTime);
         }
 
     }
