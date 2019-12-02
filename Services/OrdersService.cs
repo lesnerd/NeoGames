@@ -4,6 +4,7 @@ using NeoGames.DAL.Entities;
 
 namespace NeoGames.Services
 {
+    // Should take care of the bussiness logic
     public class OrdersService
     {
         OrdersDAOStub ordersDAO;

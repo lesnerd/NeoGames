@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NeoGames.DAL.Entities;
 using NeoGames.Services;
 
 namespace NeoGames.Controllers
@@ -16,6 +17,13 @@ namespace NeoGames.Controllers
         public OrdersController(OrdersService ordersService)
         {
             
+        }
+
+        [HttpGet]
+        public IEnumerable<OrderRecord> Get(string date)
+        {
+            var dateTime = DateTime.Parse(date);
+            return ordersService.GetOrders();
         }
 
     }

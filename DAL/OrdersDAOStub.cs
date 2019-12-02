@@ -19,8 +19,8 @@ namespace NeoGames.DAL
             
         }
 
-        // Should implement CRUD of the database table
-        // Reason for the params (fitering) so the dal layer is not wasteful
+        // Should implement CRUD to/from database
+        // Reason for the parameters is fitering, so that the dal layer is not wasteful
         public IEnumerable<OrderRecord> GetOrders(int nubmerOfItems, int index)
         {
             return records;
