@@ -10,7 +10,7 @@ using NeoGames.Services;
 namespace NeoGames.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("orders/")]
     public class OrdersController : ControllerBase
     {
         OrdersService ordersService;
@@ -21,13 +21,17 @@ namespace NeoGames.Controllers
 
         // Validate the user request/input - validated that the values are legal/exist
         // Transform the service request
-        // TODO: which one ot use???
-        //[HttpGet("{date}")]
-        [HttpGet]
-        public IEnumerable<OrderRecord> Get(string date)
+        //The controller should return 200/OK in case of a valid request and response
+        //The controller should return 400/Bad request in case of invalid date
+        //The controller should return 500/in case of internal server error for example the DB was inaccsisble 
+
+        [HttpGet] 
+        public IEnumerable<OrderRecord> Get(string date = null)
         {
             var dateTime = DateTime.Parse(date);
-            return ordersService.GetOrders(dateTime);
+            var orderReponse = ordersService.GetOrders(dateTime);
+            var orderResponseDTO = ordersResponseDTOTransformer.transform(orderReponse);
+            return orderResponseDTO;
         }
 
     }
