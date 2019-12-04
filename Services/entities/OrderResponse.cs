@@ -6,10 +6,10 @@ namespace NeoGames.Services.Entities
 {
     public class OrdersResponse
     {
-        public OrdersResponse(IEnumerable<OrderRecord> orders, DateTime date)
+        public OrdersResponse(OrdersRecordResponse ordersResponse)
         {
-            this.orders = orders;
-            this.nextIndex = date;
+            this.orders = ordersResponse.orders;
+            this.nextIndex = ordersResponse.nextOrderDate;
         }
         public IEnumerable<OrderRecord> orders;
         public DateTime nextIndex;

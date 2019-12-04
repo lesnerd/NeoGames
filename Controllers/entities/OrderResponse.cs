@@ -4,6 +4,7 @@ using NeoGames.DAL.Entities;
 
 namespace NeoGames.Controllers.Entities
 {
+    [Serializable]
     public class OrdersResponseDTO
     {
         public OrdersResponseDTO(IEnumerable<OrderRecord> orders, DateTime nextIndex)
@@ -11,8 +12,8 @@ namespace NeoGames.Controllers.Entities
             this.orders = orders;
             this.nextIndex = nextIndex;
         }
-        public IEnumerable<OrderRecord> orders;
-        public DateTime nextIndex;
+        public IEnumerable<OrderRecord> orders { get; set; }
+        public DateTime nextIndex { get; set; }
          
     }
 }

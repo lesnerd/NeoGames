@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Net.Mime;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using NeoGames.Controllers.Entities;
 using NeoGames.Controllers.Transformers;
-using NeoGames.DAL.Entities;
 using NeoGames.Services;
 
 namespace NeoGames.Controllers
@@ -27,15 +24,36 @@ namespace NeoGames.Controllers
         // Transform the service request
         //The controller should return 200/OK in case of a valid request and response
         //The controller should return 400/Bad request in case of invalid date
-        //The controller should return 500/in case of internal server error for example the DB was inaccsisble 
+        //The controller should return 500/in case of internal server error for example the DB was inaccessible 
 
         [HttpGet] 
-        public OrdersResponseDTO Get(string date = null)
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<OrdersResponseDTO> Get(string date = null, int bulkSize = 5)
         {
+            if(bulkSize < 0 || bulkSize >= int.MaxValue / 10)
+                return BadRequest("Bulksize is invalid!");
             var dateTime = DateTime.Parse(date);
-            var orderReponse = ordersService.GetOrders(dateTime);
-            var orderResponseDTO = ordersResponseDTOTransformer.Transform(orderReponse);
-            return orderResponseDTO;
+            try
+            {
+                var orderReponse = ordersService.GetOrders(dateTime, bulkSize);
+                var orderResponseDTO = ordersResponseDTOTransformer.Transform(orderReponse); 
+                // var options = new JsonSerializerSettings 
+                // {
+                //     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                // };
+
+                // return Json(documents, options);
+                return Ok(orderResponseDTO);
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, "Ops, something went wrong...");
+            }
+            
+
         }
 
     }

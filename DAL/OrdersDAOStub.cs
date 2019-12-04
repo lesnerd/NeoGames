@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using NeoGames.DAL.Entities;
+using System.Linq;
 
 namespace NeoGames.DAL
 {
@@ -16,14 +17,33 @@ namespace NeoGames.DAL
         };
         public OrdersDAOStub()
         {
-            
+            records.OrderBy(r => r.PurchaseDate);
         }
 
         // Should implement CRUD to/from database
         // Reason for the parameters is fitering, so that the dal layer is not wasteful
-        public IEnumerable<OrderRecord> GetOrders(DateTime date)
+        public OrdersRecordResponse GetOrders(DateTime date, int bulkSize)
         {
-            return records;
+            OrdersRecordResponse response = new OrdersRecordResponse();
+            IList<OrderRecord> filteredOrders = new List<OrderRecord>();
+            foreach(var order in records)
+            {
+                if(bulkSize == 0)
+                {
+                    response.orders = filteredOrders;
+                    response.nextOrderDate = order.PurchaseDate;
+                    return response;
+                }
+                if(date == null)
+                    continue;
+                if(order.PurchaseDate < date)
+                    continue;
+                filteredOrders.Add(order);
+                bulkSize--;
+            }
+            response.orders = filteredOrders;
+            response.nextOrderDate = DateTime.MinValue;
+            return response;
         }
     }
 }

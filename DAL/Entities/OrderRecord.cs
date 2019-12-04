@@ -52,5 +52,6 @@ namespace NeoGames.DAL.Entities
                 purchaseDate = value;
             }
         }
+
     }
 }

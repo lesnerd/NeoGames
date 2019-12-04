@@ -1,7 +1,6 @@
 using System;
-using System.Collections.Generic;
+using System.Data;
 using NeoGames.DAL;
-using NeoGames.DAL.Entities;
 using NeoGames.Services.Entities;
 
 namespace NeoGames.Services
@@ -14,10 +13,18 @@ namespace NeoGames.Services
         {
             this.ordersDAO = ordersDAO;
         }
-        public OrdersResponse GetOrders(DateTime date)
+        public OrdersResponse GetOrders(DateTime date, int bulkSize)
         {
-            var orders = ordersDAO.GetOrders(date);
-            return new OrdersResponse(orders, DateTime.Now);
+            try
+            {
+                var orders = ordersDAO.GetOrders(date, bulkSize);
+                return new OrdersResponse(orders);
+            }
+            catch (System.Exception)
+            {
+                throw new DataException();
+            }
+ 
         }
     }
 }
