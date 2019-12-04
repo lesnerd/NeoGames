@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using NeoGames.DAL.Entities;
 
-namespace NeoGames.Services.entities
+namespace NeoGames.Services.Entities
 {
     public class OrdersResponse
     {

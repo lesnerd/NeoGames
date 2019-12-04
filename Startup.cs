@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NeoGames.Controllers.Transformers;
 using NeoGames.DAL;
 using NeoGames.Services;
 
@@ -29,6 +30,7 @@ namespace NeoGames
         {
             services.AddTransient<OrdersService>();
             services.AddTransient<OrdersDAOStub>();
+            services.AddTransient<OrderResponseDTOTransformer>();
             services.AddControllers();
         }
 

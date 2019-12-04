@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ran\\NeoGames\\NeoGames.csproj": {}
+    "/Users/lesnerd/Documents/VSCode/DotNetCore/Restful/NeoGames/NeoGames.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ran\\NeoGames\\NeoGames.csproj": {
+    "/Users/lesnerd/Documents/VSCode/DotNetCore/Restful/NeoGames/NeoGames.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ran\\NeoGames\\NeoGames.csproj",
+        "projectUniqueName": "/Users/lesnerd/Documents/VSCode/DotNetCore/Restful/NeoGames/NeoGames.csproj",
         "projectName": "NeoGames",
-        "projectPath": "C:\\Users\\Ran\\NeoGames\\NeoGames.csproj",
-        "packagesPath": "C:\\Users\\Ran\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ran\\NeoGames\\obj\\",
+        "projectPath": "/Users/lesnerd/Documents/VSCode/DotNetCore/Restful/NeoGames/NeoGames.csproj",
+        "packagesPath": "/Users/lesnerd/.nuget/packages/",
+        "outputPath": "/Users/lesnerd/Documents/VSCode/DotNetCore/Restful/NeoGames/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ran\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/lesnerd/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
@@ -53,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.0.100/RuntimeIdentifierGraph.json"
         }
       }
     }

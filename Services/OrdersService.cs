@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using NeoGames.DAL;
 using NeoGames.DAL.Entities;
+using NeoGames.Services.Entities;
 
 namespace NeoGames.Services
 {
@@ -13,9 +14,10 @@ namespace NeoGames.Services
         {
             this.ordersDAO = ordersDAO;
         }
-        public IEnumerable<OrderRecord> GetOrders(DateTime date)
+        public OrdersResponse GetOrders(DateTime date)
         {
-            return ordersDAO.GetOrders(date);
+            var orders = ordersDAO.GetOrders(date);
+            return new OrdersResponse(orders, DateTime.Now);
         }
     }
 }

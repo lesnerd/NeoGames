@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NeoGames.Controllers.Entities;
+using NeoGames.Controllers.Transformers;
 using NeoGames.DAL.Entities;
 using NeoGames.Services;
 
@@ -14,9 +16,11 @@ namespace NeoGames.Controllers
     public class OrdersController : ControllerBase
     {
         OrdersService ordersService;
-        public OrdersController(OrdersService ordersService)
+        OrderResponseDTOTransformer ordersResponseDTOTransformer;
+        public OrdersController(OrdersService ordersService, OrderResponseDTOTransformer ordersResponseDTOTransformer)
         {
             this.ordersService = ordersService;
+            this.ordersResponseDTOTransformer = ordersResponseDTOTransformer;
         }
 
         // Validate the user request/input - validated that the values are legal/exist
@@ -26,11 +30,11 @@ namespace NeoGames.Controllers
         //The controller should return 500/in case of internal server error for example the DB was inaccsisble 
 
         [HttpGet] 
-        public IEnumerable<OrderRecord> Get(string date = null)
+        public OrdersResponseDTO Get(string date = null)
         {
             var dateTime = DateTime.Parse(date);
             var orderReponse = ordersService.GetOrders(dateTime);
-            var orderResponseDTO = ordersResponseDTOTransformer.transform(orderReponse);
+            var orderResponseDTO = ordersResponseDTOTransformer.Transform(orderReponse);
             return orderResponseDTO;
         }
 
