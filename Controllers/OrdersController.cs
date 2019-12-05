@@ -2,6 +2,7 @@ using System;
 using System.Net.Mime;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NeoGames.Contracts;
 using NeoGames.Controllers.Entities;
 using NeoGames.Controllers.Transformers;
 using NeoGames.Services;
@@ -12,9 +13,9 @@ namespace NeoGames.Controllers
     [Route("orders/")]
     public class OrdersController : ControllerBase
     {
-        OrdersService ordersService;
-        OrderResponseDTOTransformer ordersResponseDTOTransformer;
-        public OrdersController(OrdersService ordersService, OrderResponseDTOTransformer ordersResponseDTOTransformer)
+        IOrdersService ordersService;
+        IOrderResponseDTOTransformer ordersResponseDTOTransformer;
+        public OrdersController(IOrdersService ordersService, IOrderResponseDTOTransformer ordersResponseDTOTransformer)
         {
             this.ordersService = ordersService;
             this.ordersResponseDTOTransformer = ordersResponseDTOTransformer;
@@ -40,20 +41,12 @@ namespace NeoGames.Controllers
             {
                 var orderReponse = ordersService.GetOrders(dateTime, bulkSize);
                 var orderResponseDTO = ordersResponseDTOTransformer.Transform(orderReponse); 
-                // var options = new JsonSerializerSettings 
-                // {
-                //     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                // };
-
-                // return Json(documents, options);
                 return Ok(orderResponseDTO);
             }
             catch(Exception e)
             {
                 return StatusCode(500, "Ops, something went wrong...");
             }
-            
-
         }
 
     }

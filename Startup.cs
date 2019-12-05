@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NeoGames.Contracts;
 using NeoGames.Controllers.Transformers;
 using NeoGames.DAL;
 using NeoGames.Services;
@@ -28,9 +29,9 @@ namespace NeoGames
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<OrdersService>();
-            services.AddTransient<OrdersDAOStub>();
-            services.AddTransient<OrderResponseDTOTransformer>();
+            services.AddTransient<IOrdersService, OrdersService>();
+            services.AddTransient<IOrdersDAOStub, OrdersDAOStub>();
+            services.AddTransient<IOrderResponseDTOTransformer, OrderResponseDTOTransformer>();
             services.AddControllers();
         }
 

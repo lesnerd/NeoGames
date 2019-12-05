@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using System;
 using NeoGames.DAL.Entities;
 using System.Linq;
+using NeoGames.Contracts;
 
 namespace NeoGames.DAL
 {
-    public class OrdersDAOStub
+    public class OrdersDAOStub : IOrdersDAOStub
     {
         private IList<OrderRecord> records = new List<OrderRecord>()
         {
@@ -17,11 +18,14 @@ namespace NeoGames.DAL
         };
         public OrdersDAOStub()
         {
-            records.OrderBy(r => r.PurchaseDate);
+            records = records.OrderBy(r => r.PurchaseDate).ToList(); //Simulate as the list returned from DB ordered
         }
 
         // Should implement CRUD to/from database
         // Reason for the parameters is fitering, so that the dal layer is not wasteful
+        // If the date is null, take the first bulkSize items
+        // If the buld size is too large, return all the possible items
+        // Return the client the nextOrderDate for the next HttpGet request
         public OrdersRecordResponse GetOrders(DateTime date, int bulkSize)
         {
             OrdersRecordResponse response = new OrdersRecordResponse();

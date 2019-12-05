@@ -1,15 +1,16 @@
 using System;
 using System.Data;
+using NeoGames.Contracts;
 using NeoGames.DAL;
 using NeoGames.Services.Entities;
 
 namespace NeoGames.Services
 {
     // Should take care of the bussiness logic
-    public class OrdersService
+    public class OrdersService : IOrdersService
     {
-        private OrdersDAOStub ordersDAO;
-        public OrdersService(OrdersDAOStub ordersDAO)
+        private IOrdersDAOStub ordersDAO;
+        public OrdersService(IOrdersDAOStub ordersDAO)
         {
             this.ordersDAO = ordersDAO;
         }
